@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CourseDTO {
 
-    private Long courseId;
+    private int courseId;
 
     @NotBlank(message = "Name is required")
     private String name;

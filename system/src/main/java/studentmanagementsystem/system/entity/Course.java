@@ -18,7 +18,7 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long courseId;
+    private int courseId;
 
     @NotBlank(message = "Name is required")
     @Column(name = "NAME")
@@ -49,7 +49,7 @@ public class Course {
    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
    private List<Student> students;
 
-    public Course(long courseId, String name, String major, String minor, String location, String schedule, int year, int semester, int duration) {
+    public Course(int courseId, String name, String major, String minor, String location, String schedule, int year, int semester, int duration) {
         this.courseId = courseId;
         this.name = name;
         this.major = major;
@@ -79,11 +79,11 @@ public class Course {
                 '}';
     }
 
-    public Long getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Long courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 

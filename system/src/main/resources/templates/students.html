@@ -28,7 +28,7 @@
             <th> Student First Name </th>
             <th> Student Last Name </th>
             <th> Student Email </th>
-<!--            <th> Actions</th>-->
+            <th> Actions</th>
         </tr>
         </thead>
 
@@ -37,13 +37,16 @@
             <td th:text = "${student.firstName}"> </td>
             <td th:text = "${student.lastName}"> </td>
             <td th:text = "${student.email}"> </td>
-        </tr>
+            <td>
 
-        <a th:href = "@{'/students/edit/' + ${students.studentId}}"
+
+        <a th:href = "@{'/students/edit{studentId}(id=${student.studentId})}"
            class = "btn btn-primary">Update</a>
 
-        <a th:href = "@{'/students/delete/' + ${students.courseId}}"
+        <a th:href = "@{'/students/delete{studentId}(id=${student.studentId})}"
            class = "btn btn-danger">Delete</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
