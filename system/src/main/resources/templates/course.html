@@ -12,7 +12,7 @@
     <h2 >Course Creation</h2>
     <tr>
         <div align = "left" >
-            <h3><a  th:href="@{'/Course/addcourse'}">Add new</a></h3>
+            <h3><a  th:href="@{'/course/addcourse'}">Add new</a></h3>
         </div>
     </tr>
 
@@ -25,22 +25,34 @@
                 <tr>
                     <th>Course ID</th>
                     <th>Course Name</th>
+                    <th>Course Major</th>
+                    <th>Course Minor</th>
+                    <th>Course Location</th>
+                    <th>Course Schedule</th>
+                    <th>Year</th>
+                    <th>Semester</th>
                     <th>Duration</th>
-                    <th>edit</th>
-                    <th>delete</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr  th:each="course : ${listcourse}">
-                    <td th:text="${course.id}">Course ID</td>
-                    <td th:text="${course.coursename}">Course Name</td>
+                    <td th:text="${course.courseId}">Course ID</td>
+                    <td th:text="${course.name}">Course Name</td>
+                    <td th:text="${course.major}">Course Major</td>
+                    <td th:text="${course.minor}">Course Minor</td>
+                    <td th:text="${course.location}">Course Location</td>
+                    <td th:text="${course.schedule}">Course Schedule</td>
+                    <td th:text="${course.year}">Year</td>
+                    <td th:text="${course.semester}">Semester</td>
                     <td th:text="${course.duration}">Duration</td>
 
                     <td>
-                        <a th:href="@{'/Course/edit/' + ${course.id}}">Edit</a>
+                        <a th:href="@{'/course/edit/' + ${course.courseId}}">Edit</a>
                     </td>
                     <td>
-                        <a th:href="@{'/Course/delete/' + ${course.id}}">Delete</a>
+                        <a th:href="@{'/course/delete/' + ${course.courseId}}">Delete</a>
                     </td>
                 </tr>
                 </tbody>

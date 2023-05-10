@@ -1,4 +1,4 @@
-package entity;
+package studentmanagementsystem.system.entity;
 
 import javax.persistence.*;
 
@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
     private long commentId;
     private long courseId;
 
@@ -16,6 +15,13 @@ public class Comment {
 
     @Column(name = "name")
     private String name;
+
+ //  @ManyToOne(fetch = FetchType.LAZY)
+  // @JoinColumn(name = "studentId", referencedColumnName = "StudentId")
+  //private Student student;
+   //@ManyToOne(fetch = FetchType.LAZY)
+   //@JoinColumn(name = "courseId", referencedColumnName = "CourseId", insertable = false, updatable = false)
+   //private Course course;
 
     public Comment(long commentId, long courseId, String comment, String name) {
         this.commentId = commentId;

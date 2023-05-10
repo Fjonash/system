@@ -1,4 +1,4 @@
-package dto;
+package studentmanagementsystem.system.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CourseDTO {
 
-    private Long id;
+    private Long courseId;
 
     @NotBlank(message = "Name is required")
     private String name;
@@ -25,7 +25,7 @@ public class CourseDTO {
     private int year;
 
     @NotBlank(message = "Offered semester is required")
-    private String semesterOffered;
+    private int semester;
 
 
 

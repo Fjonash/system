@@ -1,4 +1,4 @@
-package entity;
+package studentmanagementsystem.system.entity;
 
 import javax.persistence.*;
 
@@ -8,13 +8,13 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id")
+   @ManyToOne
+   @JoinColumn(name = "studentId")
     private Student student;
 
     @ManyToOne
-    @JoinColumn (name = "friend_id")
-    private Student friend;
+    @JoinColumn (name = "FriendshipId")
+   private Student friend;
 
     public Long getId() {
         return id;

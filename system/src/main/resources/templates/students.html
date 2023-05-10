@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://thymeLeaf.org">
+<html xmlns:th="http://thymeLeaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Student Management System</title>
@@ -28,16 +28,22 @@
             <th> Student First Name </th>
             <th> Student Last Name </th>
             <th> Student Email </th>
-            <th> Actions</th>
+<!--            <th> Actions</th>-->
         </tr>
         </thead>
 
         <tbody>
         <tr th:each = "student: ${students}">
             <td th:text = "${student.firstName}"> </td>
-            <td th:text = "${student.secondName}"> </td>
+            <td th:text = "${student.lastName}"> </td>
             <td th:text = "${student.email}"> </td>
         </tr>
+
+        <a th:href = "@{'/students/edit/' + ${students.studentId}}"
+           class = "btn btn-primary">Update</a>
+
+        <a th:href = "@{'/students/delete/' + ${students.courseId}}"
+           class = "btn btn-danger">Delete</a>
         </tbody>
     </table>
 </div>

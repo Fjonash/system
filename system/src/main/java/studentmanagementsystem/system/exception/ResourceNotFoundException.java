@@ -1,4 +1,4 @@
-package exception;
+package studentmanagementsystem.system.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(String msg){
