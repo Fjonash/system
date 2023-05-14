@@ -6,7 +6,7 @@ public class CommentDTO {
 
     private Long commentId;
 
-    private String content;
+    private String comment;
 
     private LocalDateTime createdAt;
 

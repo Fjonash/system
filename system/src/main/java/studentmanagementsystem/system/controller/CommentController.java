@@ -49,10 +49,10 @@ public class CommentController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("students", studentService.getAllStudents());
             model.addAttribute("courses", courseService.listAll());
-            return "comment/create";
+            return "/create_comment";
         } else {
             commentService.save(comment);
-            return "redirect:/comments";
+            return "redirect:/comment";
         }
     }
 

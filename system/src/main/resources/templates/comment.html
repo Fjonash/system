@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>Comments</title>
@@ -20,14 +20,16 @@
     </thead>
     <tbody>
 
-    <tr>
-      <td>{{id}}</td>
-      <td>{{comment}}</td>
-      <td>{{student.firstName}} {{student.lastName}}</td>
-      <td>{{course.name}}</td>
+    <tr
+      th:each = "comment: ${comment}">
+      <td th:text="${comment.commentId}"></td>
+      <td th:trxt = "${comment.comment}"> </td>
+      <td th:text = "${student.firstName}"> </td>
+      <td th:text = "${{student.lastName}}"></td>
+      <td th:text = "${{course.name}}"></td>
       <td>
-        <a href="/comment/edit/{{id}}" class="btn btn-primary btn-sm">Edit</a>
-        <a href="/comment/{{id}}" class="btn btn-danger btn-sm">Delete</a>
+        <a href="/comment/edit/{{commentId}}" class="btn btn-primary btn-sm">Edit</a>
+        <a href="/comment/{{commentId}}" class="btn btn-danger btn-sm">Delete</a>
       </td>
     </tr>
 
