@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Comments</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid">
+  <h1>Comments</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Comment</th>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+      <td>{{id}}</td>
+      <td>{{comment}}</td>
+      <td>{{student.firstName}} {{student.lastName}}</td>
+      <td>{{course.name}}</td>
+      <td>
+        <a href="/comment/edit/{{id}}" class="btn btn-primary btn-sm">Edit</a>
+        <a href="/comment/{{id}}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+  <a href="/comment/create_comment" class="btn btn-success">Add Comment</a>
+</div>
+</body>
+</html>

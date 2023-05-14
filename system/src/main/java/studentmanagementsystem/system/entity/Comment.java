@@ -8,30 +8,69 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long commentId;
-    private long courseId;
 
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "name")
-    private String name;
 
- //  @ManyToOne(fetch = FetchType.LAZY)
-  // @JoinColumn(name = "studentId", referencedColumnName = "StudentId")
-  //private Student student;
-   //@ManyToOne(fetch = FetchType.LAZY)
-   //@JoinColumn(name = "courseId", referencedColumnName = "CourseId", insertable = false, updatable = false)
-   //private Course course;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "studentId")
+    private Student student;
 
-    public Comment(long commentId, long courseId, String comment, String name) {
-        this.commentId = commentId;
-        this.courseId = courseId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "courseId")
+    private Course course;
+
+    public Comment() {
+
+    }
+
+    public Comment(String comment, Student student, Course course) {
         this.comment = comment;
-        this.name = name;
+        this.student = student;
+        this.course = course;
+    }
+
+    public long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(long commentId) {
+        this.commentId = commentId;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     @Override
     public String toString() {
-        return name + " : " + comment;
+        return "Comment{" +
+                "commentId=" + commentId +
+                ", comment='" + comment + '\'' +
+                ", student=" + student +
+                ", course=" + course +
+                '}';
     }
+
 }

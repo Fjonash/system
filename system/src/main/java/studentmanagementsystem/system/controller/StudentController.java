@@ -40,7 +40,7 @@ public class StudentController {
         return "redirect:/students";
     }
 
-    @GetMapping("/edit/{studentId}")
+    @PutMapping("/edit/{studentId}")
     public String editStudentForm(@PathVariable Long id, Model model) {
         model.addAttribute("student", studentService.getStudentById(id));
         return "edit_student";
