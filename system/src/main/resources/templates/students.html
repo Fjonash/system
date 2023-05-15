@@ -40,10 +40,10 @@
             <td>
 
 
-        <a th:href = "@{/students/edit{studentId}(id=${student.studentId})}"
+        <a th:href = "@{'/students/edit/' + ${student.studentId}}"
            class = "btn btn-primary">Update</a>
 
-        <a th:href = "@{/students/delete{studentId}(id=${student.studentId})}"
+        <a th:href = "@{'/students/delete/'+${student.studentId}}"
            class = "btn btn-danger">Delete</a>
             </td>
         </tr>

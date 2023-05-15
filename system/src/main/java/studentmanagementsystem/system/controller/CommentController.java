@@ -2,14 +2,13 @@ package studentmanagementsystem.system.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import studentmanagementsystem.system.entity.Comment;
+import studentmanagementsystem.system.entity.Course;
+import studentmanagementsystem.system.entity.Student;
 import studentmanagementsystem.system.service.StudentService;
 import studentmanagementsystem.system.service.impl.CommentService;
 import studentmanagementsystem.system.service.impl.CourseService;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/comment")
@@ -29,61 +28,59 @@ public class CommentController {
 
     @GetMapping
     public String listComments(Model model) {
-        model.addAttribute("comment", commentService.listAll());
+        model.addAttribute("comments", commentService.listAll());
         return "comment";
     }
 
     @GetMapping("/create_comment")
     public String createCommentForm(Model model) {
-        Comment comment = new Comment();
-        model.addAttribute("comment", comment);
         model.addAttribute("students", studentService.getAllStudents());
         model.addAttribute("courses", courseService.listAll());
         return "/create_comment";
     }
 
-    @PostMapping
-    public String saveComment(@ModelAttribute("comment") @Valid Comment comment,
-                              BindingResult bindingResult,
-                              Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("students", studentService.getAllStudents());
-            model.addAttribute("courses", courseService.listAll());
-            return "/create_comment";
-        } else {
-            commentService.save(comment);
-            return "redirect:/comment";
-        }
+    @PostMapping("/add")
+    public String saveComment(@ModelAttribute (name = "comment_text") String comment_text,
+                              @ModelAttribute (name = "studentId") Long studentId,
+                              @ModelAttribute (name = "courseId") Long courseId
+                              ) {
+        Student student = studentService.getStudentById(studentId);
+        Course course = courseService.get(courseId);
+        Comment comment = new Comment();
+        comment.setComment(comment_text);
+        comment.setStudent(student);
+        comment.setCourse(course);
+        commentService.save(comment);
+        return "redirect:/comment";
     }
 
     @RequestMapping("/edit/{commentId}")
     public String editCommentForm(@PathVariable Long commentId, Model model) {
         Comment comment = commentService.get(commentId);
         model.addAttribute("comment", comment);
+        model.addAttribute("selectedStudent", comment.getStudent().getStudentId());
+        model.addAttribute("selectedCourse", comment.getCourse().getCourseId());
         model.addAttribute("students", studentService.getAllStudents());
         model.addAttribute("courses", courseService.listAll());
-        return "comment/edit";
+        return "edit_comment";
 
     }
-    @PutMapping("/edit/{courseId}")
+    @RequestMapping("/update/{commentId}")
     public String updateComment(@PathVariable Long commentId,
-                                @ModelAttribute("comment") @Valid Comment comment,
-                                BindingResult bindingResult,
-                                Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("students", studentService.getAllStudents());
-            model.addAttribute("courses", courseService.listAll());
-            return "comment/edit";
-        } else {
-            Comment existingComment = commentService.get(commentId);
-            existingComment.setComment(comment.getComment());
-            existingComment.setStudent(comment.getStudent());
-            existingComment.setCourse(comment.getCourse());
-            return "redirect:/comment";
-        }
+                                @ModelAttribute (name = "comment_text") String comment_text,
+                                @ModelAttribute (name = "studentId") Long studentId,
+                                @ModelAttribute (name = "courseId") Long courseId) {
+        Comment existingComment = commentService.get(commentId);
+        Student student = studentService.getStudentById(studentId);
+        Course course = courseService.get(courseId);
+        existingComment.setComment(comment_text);
+        existingComment.setStudent(student);
+        existingComment.setCourse(course);
+        commentService.save(existingComment);
+        return "redirect:/comment";
     }
 
-    @GetMapping("/{commentId}")
+    @GetMapping("/delete/{commentId}")
     public String deleteComment(@PathVariable Long commentId) {
         commentService.delete(commentId);
         return "redirect:/comment";

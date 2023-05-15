@@ -8,22 +8,22 @@
 <body>
 <div class="container-fluid">
   <h1>Add Comment</h1>
-  <form action="/comment" method="POST">
+  <form th:action="@{/comment/add}" method="POST">
     <div class="form-group">
-      <label for="comment">Comment</label>
-      <textarea id="comment" name="comment" class="form-control" required></textarea>
+      <label for="comment_text">Comment</label>
+      <textarea id="comment_text" name="comment_text" class="form-control" required></textarea>
     </div>
     <div class="form-group">
       <label for="student">Student</label>
-      <select id="student" name="student.studentId" class="form-control" required>
+      <select id="student" name="studentId" class="form-control" required>
         <option th:each="student : ${students}" th:value="${student.studentId}" th:text="${student.firstName} + ' ' + ${student.lastName}"></option>
       </select>
 
     </div>
     <div class="form-group">
       <label for="course">Course</label>
-      <select id="course" name="course.courseId" class="form-control" required>
-        <option th:each="course : ${course}" th:value="${course.courseId}" th:text="${course.name}"></option>
+      <select id="course" name="courseId" class="form-control" required>
+        <option th:each="course : ${courses}" th:value="${course.courseId}" th:text="${course.name}"></option>
       </select>
 
 

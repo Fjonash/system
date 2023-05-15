@@ -2,14 +2,12 @@ package studentmanagementsystem.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import studentmanagementsystem.system.entity.Login;
 import studentmanagementsystem.system.service.impl.LoginService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Objects;
 
 @Controller
 public class LoginController {
@@ -30,25 +28,10 @@ public class LoginController {
 
         Login oauthUser = userService.login(user.getUsername(), user.getPassword());
 
-
         System.out.print(oauthUser);
-        if (Objects.nonNull(oauthUser)) {
 
-            return "redirect:/";
-
-
-        } else {
-            return "redirect:/login";
-
-
-        }
+            return "redirect:/students";
 
     }
 
-    @RequestMapping(value = {"/logout"}, method = RequestMethod.POST)
-    public String logoutDo(HttpServletRequest request, HttpServletResponse response) {
-
-
-        return "redirect:/login";
-    }
 }

@@ -72,5 +72,4 @@ public class Comment {
                 ", course=" + course +
                 '}';
     }
-
 }

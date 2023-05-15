@@ -3,6 +3,7 @@ package studentmanagementsystem.system.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import studentmanagementsystem.system.entity.Student;
 import studentmanagementsystem.system.service.StudentService;
 
@@ -39,15 +40,16 @@ public class StudentController {
         studentService.saveStudent(student);
         return "redirect:/students";
     }
+    @GetMapping("/edit/{studentId}")
+    public ModelAndView showEditCoursePage(@PathVariable(name = "studentId") Long id) {
+        ModelAndView mav = new ModelAndView("edit_student");
+        Student student = studentService.getStudentById(id);
+        mav.addObject("student", student);
+        return mav;
 
-    @PutMapping("/edit/{studentId}")
-    public String editStudentForm(@PathVariable Long id, Model model) {
-        model.addAttribute("student", studentService.getStudentById(id));
-        return "edit_student";
     }
-
-    @PostMapping("/students/{studentId}")
-    public String updateStudent(@PathVariable Long id,
+    @PostMapping("/update/{studentId}")
+    public String updateStudent(@PathVariable(name = "studentId") Long id,
                                 @ModelAttribute("student") Student student,
                                 Model model) {
 
@@ -65,8 +67,8 @@ public class StudentController {
 
     // handler method to handle delete student request
 
-    @GetMapping("/students/{studentId}")
-    public String deleteStudent(@PathVariable Long id) {
+    @RequestMapping("/delete/{studentId}")
+    public String deleteStudent(@PathVariable(name = "studentId") Long id) {
         studentService.deleteStudentById(id);
         return "redirect:/students";
     }
